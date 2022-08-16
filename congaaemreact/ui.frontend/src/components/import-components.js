@@ -22,6 +22,7 @@ import './ExperienceFragment/ExperienceFragment';
 // Custom weather component
 import './OpenWeather/OpenWeather';
 
+
 import './Image/Image'; //add reference to Image component
 
 // Custom Header component
@@ -29,8 +30,12 @@ import './Navigation/Navigation';
 import './Header/Header';
 // Custom Product component
 import './Product/Product';
-import './Category/Category';
+import './category/category';
+import './FetchCategory/FetchCategory'
+import './List_Product/List_Product';
 import './Footer/Footer';
+
+
 
 import {MapTo} from '@adobe/aem-react-editable-components';
 
