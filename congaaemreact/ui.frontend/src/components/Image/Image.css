@@ -1,5 +1,11 @@
+.page {
+    max-width: unset;
+    padding: unset;
+}
+
 .Image-src {
     margin: 1rem 0;
     width: 100%;
     border: 0;
+    height: 55vh;
 }
