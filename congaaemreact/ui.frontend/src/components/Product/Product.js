@@ -60,16 +60,16 @@ export default class Product extends Component {
         {
           this.state.data.map(record => {
             return(
-                <div className="card" key={ record.Id }>
-                <div className="card__body">
-                    <h5 className="card__title">{record.Name}</h5>
-                    <img src={record.ImageURL !== 'NULL' ? record.ImageURL : NoImage} class="card__image"/>
-                    <p className="card__description">Standard Price</p>
+                <div className="card1" key={ record.Id }>
+                <div className="card1__body">
+                    <h5 className="card1__title">{record.Name}</h5>
+                    <img src={record.ImageURL !== 'NULL' ? record.ImageURL : NoImage} class="card1__image"/>
+                    <p className="card1__description">Standard Price</p>
 
 
                     { record.Prices && record.Prices.map(price=> {
                         return(
-                        <div className="card__price" key={ record.Id }>
+                        <div className="card1__price" key={ record.Id }>
                             ${price.ListPrice}
                         </div>
                         )
@@ -81,7 +81,7 @@ export default class Product extends Component {
                 <label class="mr-3">Quantity</label>
                 <input type="number" min="1" name="quantity" class="form-control w-25"/>
                 </div>
-                <button className="card__btn">Add to Cart</button>
+                <button className="card1__btn">Add to Cart</button>
                 </div>
             )
         })
