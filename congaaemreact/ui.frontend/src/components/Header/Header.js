@@ -12,6 +12,9 @@ import * as FaIcons from 'react-icons/fa';
 import * as BiIcons from "react-icons/bi";
 import * as FiIcons from "react-icons/fi";
 
+// fetch category listing from api
+import List_Category from '../List_Category/List_Category';
+
 // include header style file
 require('./Header.scss');
 
@@ -60,28 +63,7 @@ export default class Header extends Component {
                   <li><a class="menu__item" href="#"><BiIcons.BiCategory/> Product Catalog</a></li>
                   <li><a class="menu__item" href="#"><FiIcons.FiLogIn/> Log In</a></li>
                   <hr/>
-                  <div class="category_scroll">
-                    <div id="category_list">
-                        <li><a class="menu__item" href="#">Sales CRM Organization Features</a></li> <br/>
-                        <li><a class="menu__item" href="#">CRM Service Success Plans</a></li> <br/>
-                        <li><a class="menu__item" href="#">Networks</a></li> <br/>
-                        <li><a class="menu__item" href="#">Service Configurator</a></li> <br/>
-                        <li><a class="menu__item" href="#">PC Basic Essentials</a></li> <br/>
-                        <li><a class="menu__item" href="#">DL Servers</a></li> <br/>
-                        <li><a class="menu__item" href="#">Storage</a></li> <br/>
-                        <li><a class="menu__item" href="#">BL Servers</a></li> <br/>
-                        <li><a class="menu__item" href="#">PC Storage Essentials</a></li> <br/>
-                        <li><a class="menu__item" href="#">Lenovo PC Essentials</a></li> <br/>
-                        <li><a class="menu__item" href="#">Tesla Model S Features</a></li> <br/>
-                        <li><a class="menu__item" href="#">Enclosure & Rack</a></li> <br/>
-                        <li><a class="menu__item" href="#">Tesla Standard Range Features</a></li> <br/>
-                        <li><a class="menu__item" href="#">Processor</a></li> <br/>
-                        <li><a class="menu__item" href="#">Processor</a></li> <br/>
-                        <li><a class="menu__item" href="#">Processor</a></li> <br/>
-                        <li><a class="menu__item" href="#">Processor</a></li> <br/>
-                        <li><a class="menu__item" href="#">Processor</a></li> <br/>
-                    </div>
-                  </div>
+                  <List_Category />
                 </ul>
             </div>
         )

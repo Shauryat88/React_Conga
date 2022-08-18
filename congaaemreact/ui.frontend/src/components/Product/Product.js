@@ -24,13 +24,13 @@ export default class Product extends Component {
 }
 
   componentDidMount() {
-    const token ="eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA3MTIxNjksImV4cCI6MTY2MDcxNTc2OSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiI4Q0VENEY5RTQwNDNCNUU2NTU0MTY1MzI1MkNGRkYwQSIsImlhdCI6MTY2MDcxMjE2OSwic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.hjz5Qt9i9cuUYDUa3lmpbDEGyTU29av144-JRAdus_-vo8qVm0a6vTS38EwCChdfJr6hTyEHZMkvgbsmFcSsabvsdM3ZiXiAy8M9aBC8dqCxdpgPeXJmePpGdsE0IAp2J_AjPe5z0rn1i9YLSliwTaDf2EqTlPrR3O9VLMw3BQPG8_UJ8B8b3gdmPKuhTDoe4qKT1v5njTflj27ru0L9KF9efkjR48XkRPLbLyHCBKVSQIrZEpmJoaSZnDOZeVHqOMuM8c1uv9GL45SiaEhDzwSBKxN867VsYdpW3XiQm985VVpi1COKuJPjDXUjWkDfJ5vd0la3zFhmHRQKvYVqcw";
+    const token ="eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA3NjEyODMsImV4cCI6MTY2MDc2NDg4MywiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiI1RTBERDU4NUJCNzdCNDFDMzE2RTEyMzIwNUEzQjA1QiIsImlhdCI6MTY2MDc2MTI4Mywic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.kvyNI78vDoledjJf-P9KGJSJKArGVKjLXSuWpyy03n8RxNaDqrycivjUR_SJ0FB9Fjq02is06fvbI2-c1KX4vN2Apol3DQ74raUGRy5LyQL3PBdenBowpq-3UFYpxNRhT6DArSL_HUZHZIebwzszCYiACZ_5XO9CiFRfR8H1WFYGmT8FulbXTjFA_vLjv4I0OfMXMHFokikmKFBcqGSkXkGsTASkqSBDLHQB44w6WZnvzqrm1mbDjko5Zg4kGnLw-JyR_MYY1C8Tck7sqnHzCQxiMZDY8kQJQJQ5hnj6NEW8bziV3y2UBFMHMJGdnEsSAj5eguJgM1XisBXZ8W6N2g";
     fetch(
       "https://rlp-qa.congacloud.io/api/catalog/v1/products?includes=prices",
       {
         method: "GET",
         headers: {
-              "Content-Type": "application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
           pricelistid: "62ad6108-6abc-465c-b137-3bd3327a2fe6",
           OrganizationId: "a5b2b6fe-02b7-47aa-b7ec-ecb619cc2f23",
@@ -49,7 +49,8 @@ export default class Product extends Component {
 
 
     render() {
- console.log(this.state.data);
+    console.log("Product List");
+    console.log(this.state.data);
 
         if(ProductEditConfig.isEmpty(this.props)) {
             return null;
