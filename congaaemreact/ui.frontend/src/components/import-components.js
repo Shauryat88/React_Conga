@@ -30,10 +30,11 @@ import './Navigation/Navigation';
 import './Header/Header';
 // Custom Product component
 import './Product/Product';
-import './category/category';
 import './FetchCategory/FetchCategory'
 import './List_Product/List_Product';
 import './Footer/Footer';
+
+import './ProductCatalog/ProductCatalog';
 
 
 

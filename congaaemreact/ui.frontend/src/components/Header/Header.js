@@ -59,8 +59,8 @@ export default class Header extends Component {
                 </label>
 
                 <ul class="menu__box">
-                  <li><a class="menu__item" href="#"><FaIcons.FaHome/> Home</a></li>
-                  <li><a class="menu__item" href="#"><BiIcons.BiCategory/> Product Catalog</a></li>
+                  <li><a class="menu__item" href="/content/congaaemreact/us/en/home.html"><FaIcons.FaHome/> Home</a></li>
+                  <li><a class="menu__item" href="/content/congaaemreact/us/en/catalog.html"><BiIcons.BiCategory/> Product Catalog</a></li>
                   <li><a class="menu__item" href="#"><FiIcons.FiLogIn/> Log In</a></li>
                   <hr/>
                   <List_Category />
