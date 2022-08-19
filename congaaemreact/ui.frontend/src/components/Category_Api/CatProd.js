@@ -1,7 +1,7 @@
 import React from 'react';
 import { getData } from '../Category_Api/Category_Api';
 import NoImage from '../../media/No-image-found.jpg';
-
+import {token} from "../storeToken.js";
 require('../Product/Product.scss');
 require('../ProductCatalog/ProductCatalog.css');
 
@@ -20,7 +20,6 @@ export default class CatProd extends React.Component {
   async getRandomUsers(cat_id) {
     console.log(cat_id);
     const category_id = cat_id;
-    const token ="eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA5MTYwMzEsImV4cCI6MTY2MDkxOTYzMSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiI1QkJGNTc3RTFGRkVDRDhBMEFGRkRGQjhCQUY5Mjk2QSIsImlhdCI6MTY2MDkxNjAzMSwic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.R4-i2MmY1dU5bKTK4edKXP2Ompa_84P4LjBGpCvBQHTgLQ67Gn_Ya7y_VvhPARbjLd6cZIzt3P0k7UgMM8cA7_Ta1Qscsuhib91ANxRkJipcZfiC_R_yVlqZ9Bh-3lmc6hL0q4UqmKxVnvUnqBH4AdL2035kzqdaubjf-6Nat_eDrwIpjpfscpvK-OOIxIF5vHVlDGt7Xjfk1Nan4mIvwmdraqE3x4F14COsF1LcYEvvFuf0ZOk8eKKUxwUNzVP8IvVAW5NKyhtGLMlj6TAhwsDBb3icOZRplIuva5zHTsky1N95K1sz16f-AP1JiWCNbj6-F-8eFIlgzwW_NR7RaA";
     // check the cat_id is undefined, if undefined means, call list product api
     if (cat_id === undefined) {
     console.log('variable is undefined');

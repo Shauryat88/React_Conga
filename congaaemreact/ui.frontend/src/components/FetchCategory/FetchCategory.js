@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {MapTo} from '@adobe/aem-react-editable-components';
-
+import {token} from "../storeToken.js";
 
 // include product style file
 require('./FetchCategory.scss');
@@ -25,7 +25,6 @@ export default class FetchCategory extends Component {
 }
 
   componentDidMount() {
-  const token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA2NjI3NzEsImV4cCI6MTY2MDY2NjM3MSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiIwNURDMTRFMkY2QTI0RDlBQzBFRjNEMzNFQUU5OTMxQyIsImlhdCI6MTY2MDY2Mjc3MSwic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.TV3Z8r379pQaL4gSO6UoYC0jm2Eum8yZGvMhnVBIboKo2kSziaxE5zWGS4aXD2-eZBO0ImbQWIk1n8ezLa3F5s10Xja1EbI4SpUDRtH8CcUMblYEstvE-fFvXZI7ayCpslY2NosXD1GJDS1tPrNHfNbSYvwdxkJyk0d3re5p5uS53dNkkm-TydqukOrPQbii8YxhjTlWxtIOBwXcvGv6OFezw45ZvnMpr9WJ1zurQL6t82QoaVjHY-KDz_NhGH2-ywZu4OHKCAhvQWtJdpPH2sqMHkPXXtnJIsr-m8j9jtkCrDL_jlLUvS2nENj4bRy-Jf_mYfUx1HH6oYbktXLK1Q";
     fetch(
     "https://rlp-qa.congacloud.io/api/catalog/v1/categories/ACS_Cat_Category_34",
         {

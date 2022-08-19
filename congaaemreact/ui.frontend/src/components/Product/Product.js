@@ -3,6 +3,7 @@ import {MapTo} from '@adobe/aem-react-editable-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import { Modal} from "react-bootstrap";
+import {token} from "../storeToken.js";
 // include product style file
 require('./Product.scss');
 
@@ -27,9 +28,7 @@ export default class Product extends Component {
 }
 
   componentDidMount() {
-  
-    const token ="eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA5MjM0OTMsImV4cCI6MTY2MDkyNzA5MywiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiJGMDVEMzQwRUFENTkxM0NGQzgwMzEzODVERjJCM0JGQiIsImlhdCI6MTY2MDkyMzQ5Mywic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.DPqUggdPpwPC-3EGj8NC-2TE--d0zoC4kgBIo7teHGz640AwFoYE7UVPLY38Jw_YUS7C2trH77af3brsG1CbUYYEnR5ron_GZADTKe5UdB9pGEh_RCUiu43_im4l5Ez9XXUAb_XT2BwH9Z17wIjG8DZVGa0ouWHqE4FkrXxt3jkuI06Aghlk1G4DZF-knMw532VDjrbxqKWmxApVU2q6ODcGx3LdNr_aZzEn79PVmgn_YZ-B_Flev9uY7YJgTPWd3TWpRIS4skhhi0TYdyfWnGBAdz7ke79Mm1X3tjmWmkD1jnCaNFkRPe-NN0Y3ZNPks2fbZ_ruPKCrisDDRiyA9w";
-        fetch(
+     fetch(
       "https://rlp-qa.congacloud.io/api/catalog/v1/products?includes=prices",
       {
         method: "GET",

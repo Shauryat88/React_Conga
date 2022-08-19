@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {MapTo} from '@adobe/aem-react-editable-components';
-
+import {token} from "../storeToken.js";
 export const CategoryEditConfig = {
 
     emptyLabel: 'Category',
@@ -20,7 +20,6 @@ constructor() {
 }
 
   componentDidMount() {
-   const token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA2NjY1MDEsImV4cCI6MTY2MDY3MDEwMSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiJFM0FCNjM4QkM1QUI5M0RGN0RBMDQ2MDdGMERBMTZEQiIsImlhdCI6MTY2MDY2NjUwMSwic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.yZqLmwKpRwagXwT65fRY3WHMApsR5ATSkv-EDEJXfdwmXOCfcPaHgvtYpyM8LtFt1ua6YY7F27rSI1fBauyHZEM2_nu6dGbGHADcPvoNHGiSyUdA2p1PehgBrsMHAjkX3cE3luaQj2yrdm0uYQQ1FYhrB0f-1eB35CBreUWt5DODl3lmSsksymcITMNSgIpD9E1dpTjAoMvz5pcFB6guRNVmZqDq_DkSwTx5VWZ7yynaeCKhiUewIkieygH4EJh07V8evetWAy33nQLXhBtmufOOOQiOQpGo-k5Zfp7nbXh3rMcAVQ8z2CMrTKjmi5xe99saYzurxZJ9a1bzORTdYg";
     fetch(
       "https://rlp-qa.congacloud.io/api/catalog/v1/categories",
       {
