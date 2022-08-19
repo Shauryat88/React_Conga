@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {MapTo} from '@adobe/aem-react-editable-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import { Modal} from "react-bootstrap";
 //import productsData from '../../products.json';
-
 // include product style file
 require('./List_Product.scss');
 
@@ -14,16 +16,18 @@ export const List_ProductEditConfig = {
 
 export default class List_Product extends Component {
 
+
  constructor() {
     super();
     this.state = {
         data: [],
+          isOpen:[],
     };
 }
 
-
   componentDidMount() {
-       const token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA2NjI3NzEsImV4cCI6MTY2MDY2NjM3MSwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiIwNURDMTRFMkY2QTI0RDlBQzBFRjNEMzNFQUU5OTMxQyIsImlhdCI6MTY2MDY2Mjc3MSwic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.TV3Z8r379pQaL4gSO6UoYC0jm2Eum8yZGvMhnVBIboKo2kSziaxE5zWGS4aXD2-eZBO0ImbQWIk1n8ezLa3F5s10Xja1EbI4SpUDRtH8CcUMblYEstvE-fFvXZI7ayCpslY2NosXD1GJDS1tPrNHfNbSYvwdxkJyk0d3re5p5uS53dNkkm-TydqukOrPQbii8YxhjTlWxtIOBwXcvGv6OFezw45ZvnMpr9WJ1zurQL6t82QoaVjHY-KDz_NhGH2-ywZu4OHKCAhvQWtJdpPH2sqMHkPXXtnJIsr-m8j9jtkCrDL_jlLUvS2nENj4bRy-Jf_mYfUx1HH6oYbktXLK1Q";
+      const token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjAyRDhBQzE4QTIzNEI4QUEwRDM2NzVEOEUxNTEzMjY5NThCMEU3OThSUzI1NiIsInR5cCI6ImF0K2p3dCIsIng1dCI6IkF0aXNHS0kwdUtvTk5uWFk0VkV5YVZpdzU1ZyJ9.eyJuYmYiOjE2NjA4ODcwMzQsImV4cCI6MTY2MDg5MDYzNCwiaXNzIjoiaHR0cHM6Ly9sb2dpbi5jb25nYWNsb3VkLmlvL2ludC9hcGkvdjEvYXV0aCIsImNsaWVudF9pZCI6ImNvbmdhLWFlbS1wb2MiLCJqdGkiOiI2OEIwMTk5OTJDMDE0OUQ2MDIwREY5Q0M0OTAwODY2MCIsImlhdCI6MTY2MDg4NzAzNCwic2NvcGUiOlsiQXV0aC5BcGkuUmVhZCJdfQ.BjNw1sZgQ-Qs2o9Huh8DFAbdEj3bnDaQN6Zda-qH-J_DX1F414NZ38slzQ11O2ouv3kMED8gd86LO8oanNV8Z-2KT0_JAdrIdUjsRO_zxWtguDgcbWH6sDLDxugDzHwq-qwdEheQbxBPERscVkjH6eCITUtF0FlcGF9Ldi47m8ovOT7sYFoTnknojYKM0G_NYHr1rqaeZYCPOHc2oYvamEG8i0YriIAd00yuBG0XFUe3_nTExIbSalz3M-YxkIXFyzQqBnGbsjYd85zxugUNL_x2aov89ICuMFB0-g_80h42Z-e-h8DwLOJI_CGu0tZ37bxiH4smGumtzcw_Iyt0cQ";
+       
         fetch(
         "https://rlp-qa.congacloud.io/api/catalog/v1/categories/ACS_Cat_Category_34/products?includes=prices&includes=categories",
         {
@@ -45,6 +49,27 @@ export default class List_Product extends Component {
         });
     }
 
+     openModal = (index) => {
+        this.setState(state => {
+          const isOpen = state.isOpen;
+          isOpen[index]= true
+         return isOpen
+
+        } );
+
+    console.log(index);
+      }
+      closeModal = (index) => {
+
+        this.setState(state => {
+          const isOpen = state.isOpen;
+          isOpen[index]= false
+          return isOpen
+
+        } );
+      }
+
+
 render() {
     console.log(this.state.data);
 
@@ -52,42 +77,87 @@ render() {
          return null;
      }
 
-    return (
-      <div className="wrapper">
-        {Array.from(this.state.data).map((record) => {
-          return (
-            <div className="card" key={record.Id}>
-              <div className="card__body">
-                <h5 className="card__title">{record.Name}</h5>
-                <img src={record.ImageURL} class="card__image" />
-                <p className="card__description">Standard Price</p>
+        return (
+        <div className="wrapper">
+        {
+          this.state.data.map((record,index) => {
+            return(
+                <div className="card1" key={ record.Id }>
+                <div className="card1__body">
+                    <h5 className="m-0 font-weight-bold d-flex text-break ng-tns-c123-15"><b>{record.Name}</b></h5>
+                    <img src={record.ImageURL} class="card1__image" />
+                    <p className="text-truncate ng-tns-c123-3" style={{margin:"5px 0px -4px 15px"}}>Standard Price</p>
 
-                {record.Prices &&
-                  record.Prices.map((price) => {
-                    return (
-                      <div className="card__price" key={record.Id}>
-                        ${price.ListPrice}
-                      </div>
-                    );
-                  })}
-              </div>
-              <hr />
-              <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
+
+                    { record.Prices && record.Prices.map(price=> {
+                        return(
+                        <div className="card__price" key={ record.Id }>
+                            ${price.ListPrice}
+                        </div>
+                        )
+                    })}
+
+                </div>
+                <hr/>
+                <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
                 <label class="mr-3">Quantity</label>
-                <input
-                  type="number"
-                  min="1"
-                  name="quantity"
-                  class="form-control w-25"
-                />
-              </div>
-              <button className="card__btn">Add to Cart</button>
-            </div>
-          );
+                <input type="number" min="1" name="quantity" value="1" class="form-control w-25"/>
+                </div>
+                <popup>
+
+                             <div className=" button">
+                                              <button
+                                                  className="btn btn-block btn-outline-primary btn-sm ladda-button"
+                                                  key={record.Id}
+                                                  onClick={() => this.openModal(index)}
+                                                  style={{width: "90%", height: "40px",border:"2px solid"}}
+                                                >
+                                                  View Details
+                                                </button>
+                                                <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"2px solid4"}}>
+                                                  Add to Cart
+                                                </button>
+
+                                              </div>
+                            <Modal key = {record.Id} show={ this.state.isOpen && this.state.isOpen[index]} onHide={()=>this.closeModal(index)}>
+                              <Modal.Header closeButton>
+                                <Modal.Title><div key={record.Id}><h3>{record.Name} </h3></div></Modal.Title>
+                              </Modal.Header>
+
+                              <Modal.Body><img src={record.ImageURL} class="popup_image" /><br/>
+
+                             {record.Id}
+                            <p id="price"> Standard Price: {record.Prices && record.Prices.map((price) => {
+                                  return (
+                                    <div className="card__price" key={record.Id}>
+                                      ${price.ListPrice}
+                                    </div>
+                                  );
+                                })}</p></Modal.Body>
+                              <Modal.Footer>
+                              <div className='option'  >
+                              <label class="mr-3">Quantity</label>
+                              <input type="number" min="1" name="quantity" value="1" class="form-control w-25"/>
+                              </div>
+                              <button variant="primary" className="card__btn" style={{width: "130px"}}>Add to cart </button>
+                              /*  <Button variant="secondary" onClick={()=>this.closeModal(index)}>
+                                 Close
+                               </Button>*/
+                              </Modal.Footer>
+                            </Modal>
+                          </popup>
+
+
+                </div>
+            )
+        })
         }
-        )}
-      </div>
-    );
+
+
+        </div>
+
+
+        );
   }
 }
 

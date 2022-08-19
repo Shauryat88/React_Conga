@@ -1,6 +1,16 @@
 // @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
-
-
+.button{
+margin-left: 10%
+}
+.buttons{
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+margin: 18px;
+}
+.popup_image{
+width:100%
+}
 /* color variables */
 $clr-primary: #0079cc;
 $clr-primary-hover: #29e6a7;
@@ -50,6 +60,15 @@ background-clip: initial;
 border: 1px solid #dedede;
 border-radius: 0.1rem;
 
+.card1__image {
+    width: 100%;
+    width: 100%;
+    max-height: 11rem;
+    max-width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+
 &__image{
 height:12rem;
 width:100%;
@@ -92,7 +111,7 @@ border-radius: 0.1rem;
 }
 
 &:hover{
-// transform:scale(1.02);
+transform:scale(1.02);
 }
 
 &:hover &__btn{
