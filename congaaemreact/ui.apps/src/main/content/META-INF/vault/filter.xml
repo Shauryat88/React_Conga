@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/apps/congaaemreact/clientlibs"/>
+    <filter root="/apps/congaaemreact/components"/>
+    <filter root="/apps/congaaemreact/i18n"/>
+</workspaceFilter>

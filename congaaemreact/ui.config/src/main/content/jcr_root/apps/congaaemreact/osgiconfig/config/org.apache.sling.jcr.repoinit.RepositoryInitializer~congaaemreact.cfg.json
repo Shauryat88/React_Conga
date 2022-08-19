@@ -1,0 +1,7 @@
+{
+    "scripts": [
+        "create path (sling:OrderedFolder) /content/dam/congaaemreact",
+        "create path (nt:unstructured) /content/dam/congaaemreact/jcr:content",
+        "set properties on /content/dam/congaaemreact/jcr:content\n  set cq:conf{String} to /conf/congaaemreact\n  set jcr:title{String} to \"CongaAemReact\"\nend"
+    ]
+}
