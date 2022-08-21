@@ -3,7 +3,6 @@ import congaLogo from '../../media/conga-logo.png';
 import {MapTo} from '@adobe/aem-react-editable-components';
 import { withRouter } from "react-router";
 import {Link} from "react-router-dom";
-
 // implement font-icon
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faShoppingCart } from '@fortawesome/free-solid-svg-icons';
@@ -15,13 +14,14 @@ import * as FiIcons from "react-icons/fi";
 // fetch category listing from api
 import List_Category from '../List_Category/List_Category';
 
+import Cart from '../Cart/Cart';
+
 // include header style file
 require('./Header.scss');
 
 export const HeaderEditConfig = {
 
     emptyLabel: 'Header',
-
     isEmpty: function(props) {
         return !props || !props.items || props.items.length < 1;
     }
@@ -31,13 +31,13 @@ export default class Header extends Component {
 
     get searchButton() {
     return(<div className="Search">
-           | <FontAwesomeIcon icon={faSearch} />
+            <FontAwesomeIcon icon={faSearch} />
          </div>)
     }
 
     get cartButton() {
     return(<div className="Cart">
-           | <FontAwesomeIcon icon={faShoppingCart} />
+            <FontAwesomeIcon icon={faShoppingCart} />
          </div>)
     }
 
@@ -59,8 +59,8 @@ export default class Header extends Component {
                 </label>
 
                 <ul class="menu__box">
-                  <li><a class="menu__item" href="#"><FaIcons.FaHome/> Home</a></li>
-                  <li><a class="menu__item" href="#"><BiIcons.BiCategory/> Product Catalog</a></li>
+                  <li><a class="menu__item" href="/content/congaaemreact/us/en/home.html"><FaIcons.FaHome/> Home</a></li>
+                  <li><a class="menu__item" href="/content/congaaemreact/us/en/catalog.html"><BiIcons.BiCategory/> Product Catalog</a></li>
                   <li><a class="menu__item" href="#"><FiIcons.FiLogIn/> Log In</a></li>
                   <hr/>
                   <List_Category />
@@ -81,10 +81,10 @@ export default class Header extends Component {
                     {this.logo}
                     {this.searchButton}
                     {this.cartButton}
+                    <Cart />
                 </div>
             </header>
         );
     }
 }
-
 MapTo('congaaemreact/components/header')(withRouter(Header), HeaderEditConfig);
