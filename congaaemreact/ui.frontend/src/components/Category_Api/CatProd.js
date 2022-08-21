@@ -23,16 +23,16 @@ export default class CatProd extends React.Component {
     // check the cat_id is undefined, if undefined means, call list product api
     if (cat_id === undefined) {
     console.log('variable is undefined');
-    const res = await fetch(`https://rlp-qa.congacloud.io/api/catalog/v1/products?includes=prices`,
+    const res = await fetch(`https://rlp-dev.congacloud.io/api/catalog/v1/products?includes=prices`,
           {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-              pricelistid: "ACS_PL_SortingCat_PL",
-              OrganizationId: "a5b2b6fe-02b7-47aa-b7ec-ecb619cc2f23",
-              OrganizationFriendlyId: "rlp-qa-org2",
-              UserId: "89761836-4d5e-4716-a320-764fedf7c0e8"
+                  "Content-Type": "application/json",
+		          Authorization: `Bearer ${token}`,
+		          pricelistid: "cbc75112-60e9-47b2-a632-f70d5912b70f",
+		          OrganizationId: "a65544f2-b4cb-400c-a014-1fd6b04861c9",
+		          OrganizationFriendlyId: "rlp-dev",
+		          UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
             }
           }
     );
@@ -45,16 +45,16 @@ export default class CatProd extends React.Component {
     return response1;
     }
     else{
-    const res = await fetch(`https://rlp-qa.congacloud.io/api/catalog/v1/categories/${category_id}/products?includes=prices&includes=categories`,
+    const res = await fetch(`https://rlp-dev.congacloud.io/api/catalog/v1/categories/${category_id}/products?includes=prices&includes=categories`,
           {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-              pricelistid: "ACS_PL_SortingCat_PL",
-              OrganizationId: "a5b2b6fe-02b7-47aa-b7ec-ecb619cc2f23",
-              OrganizationFriendlyId: "rlp-qa-org2",
-              UserId: "89761836-4d5e-4716-a320-764fedf7c0e8"
+	          "Content-Type": "application/json",
+	          Authorization: `Bearer ${token}`,
+	          pricelistid: "cbc75112-60e9-47b2-a632-f70d5912b70f",
+	          OrganizationId: "a65544f2-b4cb-400c-a014-1fd6b04861c9",
+	          OrganizationFriendlyId: "rlp-dev",
+	          UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
             }
           }
     );

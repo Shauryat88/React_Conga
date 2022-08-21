@@ -26,16 +26,16 @@ export default class FetchCategory extends Component {
 
   componentDidMount() {
     fetch(
-    "https://rlp-qa.congacloud.io/api/catalog/v1/categories/ACS_Cat_Category_34",
+    "https://rlp-dev.congacloud.io/api/catalog/v1/categories/${category_id}",
         {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-            pricelistid: "ACS_PL_SortingCat_PL",
-            OrganizationId: "a5b2b6fe-02b7-47aa-b7ec-ecb619cc2f23",
-            OrganizationFriendlyId: "rlp-qa-org2",
-            UserId: "89761836-4d5e-4716-a320-764fedf7c0e8"
+                 "Content-Type": "application/json",
+		          Authorization: `Bearer ${token}`,
+		          pricelistid: "cbc75112-60e9-47b2-a632-f70d5912b70f",
+		          OrganizationId: "a65544f2-b4cb-400c-a014-1fd6b04861c9",
+		          OrganizationFriendlyId: "rlp-dev",
+		          UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
           }
         }
       )
