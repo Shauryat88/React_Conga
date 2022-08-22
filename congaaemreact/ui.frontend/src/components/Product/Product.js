@@ -3,6 +3,8 @@ import {MapTo} from '@adobe/aem-react-editable-components';
 import NoImage from '../../media/No-image-found.jpg';
 import {token} from "../storeToken.js";
 import Cookies from 'universal-cookie';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal} from "react-bootstrap";
 
 // include product style file
 require('./Product.scss');
@@ -23,6 +25,7 @@ export default class Product extends Component {
     super();
     this.state = {
         data: [],
+         isOpen:[],
     };
 }
 
@@ -48,7 +51,25 @@ export default class Product extends Component {
       console.log("error", err);
     });
   }
+ openModal = (index) => {
+    this.setState(state => {
+      const isOpen = state.isOpen;
+      isOpen[index]= true
+     return isOpen
 
+    } );
+
+console.log(index);
+  }
+  closeModal = (index) => {
+
+    this.setState(state => {
+      const isOpen = state.isOpen;
+      isOpen[index]= false
+      return isOpen
+
+    } );
+  }
   async createCart(p_id,p_name,price)
   {
 //    console.log(p_id);
@@ -95,10 +116,7 @@ export default class Product extends Component {
     console.error('Error:', error);
   });
   }
-
-
-
-    render() {
+     render() {
 //    console.log("Product List");
 //    console.log(this.state.data);
 
@@ -109,18 +127,16 @@ export default class Product extends Component {
         return (
         <div className="wrapper">
         {
-          this.state.data.map(record => {
+                this.state.data.map((record,index) => {
             return(
                 <div className="card1" key={ record.Id }>
                 <div className="card1__body">
-                    <h5 className="card1__title">{record.Name}</h5>
-                    <img src={record.ImageURL !== 'NULL' ? record.ImageURL : NoImage} class="card1__image"/>
-                    <p className="card1__description">Standard Price</p>
-
-
+                    <h5 className="card1__title" id="card1__title" ><b>{record.Name}</b></h5>
+                    <img src={record.ImageURL} class="card1__image" id="card1__image" />
+                    <p className="text-truncate ng-tns-c123-3" style={{margin:"5px 0px -4px 15px" ,font:"12px" }}>Standard Price</p>
                     { record.Prices && record.Prices.map(price=> {
                         return(
-                        <div className="card1__price" key={ record.Id }>
+                        <div className="card__price" key={ record.Id }>
                             ${price.ListPrice}
                         </div>
                         )
@@ -130,23 +146,56 @@ export default class Product extends Component {
                 <hr/>
                 <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
                 <label class="mr-3">Quantity</label>
-                <input type="number" min="1" name="quantity" class="form-control w-25"/>
+               <input type="number" min="1" name="quantity"  placeholder="1"  class="form-control w-25"/>
                 </div>
 
-                { record.Prices && record.Prices.map(price=> {
-                   return(
-                    <button className="card1__btn" onClick={this.createCart.bind(this, record.Id,record.Name,price.ListPrice)}>Add to Cart</button>
-                     )
-                   })}
+                 <popup>
+                             <div className=" button">
+                                              <button
+                                                  className="btn btn-block btn-outline-primary btn-sm ladda-button"
+                                                  key={record.Id}
+                                                  onClick={() => this.openModal(index)}
+                                                  style={{width: "90%", height: "40px",border:"2px solid"}}
+                                                >
+                                                  View Details
+                                                </button>
+                                                     { record.Prices && record.Prices.map(price=> {
+                                                     return(
+                                                     <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"2px solid"}} onClick={this.createCart.bind(this, record.Id,record.Name,price.ListPrice)}>Add to Cart</button>
+                                                         )
+                                                    })}
+                                              </div>
+                            <Modal key = {record.Id} show={ this.state.isOpen && this.state.isOpen[index]} onHide={()=>this.closeModal(index)}>
+                              <Modal.Header closeButton>
+                                <Modal.Title><div key={record.Id}><h3>{record.Name} </h3></div></Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body><img src={record.ImageURL} class="popup_image" /><br/>
 
-
+                            <p id="price"> Standard Price: {record.Prices && record.Prices.map((price) => {
+                                  return (
+                                    <div className="card__price" key={record.Id}>
+                                      ${price.ListPrice}
+                                    </div>
+                                  );
+                                })}</p></Modal.Body>
+                              <Modal.Footer style={{padding:"0"}}>
+                              <div className=' d-flex input-group-sm ng-star-inserted' style={{margin: " 9px 246px -71px 0px"}} >
+                              <label class="mr-3">Quantity</label>
+                              <input type="number" min="1" name="quantity" placeholder="1" class="form-control w-25"/>
+                              </div>
+                              { record.Prices && record.Prices.map(price=> {
+                                                 return(
+                                                  <button variant="primary" className="card__btn" style={{width: "130px"}} onClick={this.createCart.bind(this, record.Id,record.Name,price.ListPrice)}>Add to Cart</button>
+                                                   )
+                                                 })}
+                              </Modal.Footer>
+                            </Modal>
+                          </popup>
                 </div>
             )
         })
         }
         </div>
-
-
         );
     }
 }

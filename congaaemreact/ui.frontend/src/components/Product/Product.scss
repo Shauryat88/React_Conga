@@ -1,4 +1,22 @@
 // @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+#card1__image{
+ height:12rem;
+ width:100%;
+ max-height: 11rem;
+ max-width: 100%;
+ object-fit: contain;
+  //margin-top: 20px;
+ }
+
+
+ #card1__title{
+ padding: 1rem;
+ height: 3rem;
+ font-size:14px;
+ font-weight:700 !important;
+ }
+
+
 .button{
 margin-left: 10%
 }
@@ -11,6 +29,7 @@ margin: 18px;
 .popup_image{
 width:100%
 }
+
 /* color variables */
 $clr-primary: #0079cc;
 $clr-primary-hover: #29e6a7;
@@ -43,44 +62,34 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(12rem, 16rem));
 gap:2rem;
 justify-content:center;
-padding: 45px 9.5rem;
 }
-.card1{
+
+.card{
 overflow:hidden;
+box-shadow:0 2px 20px $clr-gray300;
+border-radius:$radius;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
 cursor:pointer;
 transition:transform 200ms ease-in;
-position: relative;
-min-width: 0;
-word-wrap: break-word;
-background-color: #f8f8f8;
-background-clip: initial;
-border: 1px solid #dedede;
-border-radius: 0.1rem;
-
-.card1__image {
-    width: 100%;
-    width: 100%;
-    max-height: 11rem;
-    max-width: 100%;
-    -o-object-fit: contain;
-    object-fit: contain;
-}
+background: grey;
 
 &__image{
 height:12rem;
 width:100%;
-// object-fit:cover;
 max-height: 8rem;
 max-width: 100%;
 object-fit: contain;
+ //margin-top: 20px;
 }
 
+
 &__title{
-padding:1rem;
+padding: 1rem;
 height: 3rem;
+font-size:14px;
+font-weight:700 !important;
 }
 
 &__description{
@@ -93,21 +102,25 @@ font-size: larger;
 font-weight: 700;
 font-family: cursive;
 }
+&__pricepop{
+font-size: larger;
+font-weight: 700;
+font-family: cursive;
+}
+
 
 &__btn{
+padding:1rem;
 font-family:inherit;
-font-weight:400;
+font-weight:bold;
+font-size:1rem;
 margin:1rem;
-border:1px solid $clr-primary;
+border:2px solid $clr-primary;
 background:transparent;
 color:$clr-primary;
 border-radius:$radius;
 transition:background 200ms ease-in, color 200ms ease-in;
 cursor: pointer;
-padding: 0.25rem 0.5rem;
-font-size: .77rem;
-line-height: 1.5;
-border-radius: 0.1rem;
 }
 
 &:hover{
@@ -154,5 +167,4 @@ border: 1px solid #93a1aa;
     display: flex!important;
     padding: 0.75rem 1.25rem;
 }
-
 
