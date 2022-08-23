@@ -1,4 +1,4 @@
-// @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");#standard_price{font-size: 12px;}
 #card1__image{
  height:12rem;
  width:100%;
@@ -27,7 +27,14 @@ justify-content: center;
 margin: 18px;
 }
 .popup_image{
-width:100%
+width: 100%;
+display: flex;
+margin: auto;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+max-width: 300px;
+max-height: 300px;
 }
 
 /* color variables */
@@ -167,4 +174,3 @@ border: 1px solid #93a1aa;
     display: flex!important;
     padding: 0.75rem 1.25rem;
 }
-

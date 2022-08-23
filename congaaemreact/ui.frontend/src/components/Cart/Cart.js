@@ -18,7 +18,7 @@ export default class Cart extends React.Component {
     const cartId = cookies.get('cartId');
 
     fetch(
-      `https://rlp-dev.congacloud.io/api/Cart/v1/carts/${cartId}`,
+      `https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/items`,
       {
         method: "GET",
         headers: {
@@ -40,8 +40,31 @@ export default class Cart extends React.Component {
 
 
   render() {
+    console.log('Get Cart Items');
+//    console.log(this.state.data);
+    const Records = this.state.data;
+    console.log(Records);
     return (
+         <div class="main">
             <button onClick={this.getCart.bind(this)}>View Cart</button>
-        );
+
+            <div>
+                {Records && Records.map(record => {
+                return(
+                <div>
+                  {record.LineItems && record.LineItems.map((obj, i) => {
+                    return (
+                      <div key={i}>
+                        <h2>Name: {obj.Name}</h2>
+                        <h2>Quantity: {obj.Quantity}</h2>
+                      </div>
+                    );
+                  })}
+                </div>
+                );
+                })}
+            </div>
+         </div>
+           );
   }
 }

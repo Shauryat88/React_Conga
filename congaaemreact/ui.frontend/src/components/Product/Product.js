@@ -70,11 +70,10 @@ console.log(index);
 
     } );
   }
-  async createCart(p_id,p_name,price)
+  async createCart(p_id,p_name)
   {
-//    console.log(p_id);
     console.log(p_name);
-//    console.log(price);
+    const cookies = new Cookies();
 
   const createcart = [
   {
@@ -82,40 +81,85 @@ console.log(index);
               "Id": "cbc75112-60e9-47b2-a632-f70d5912b70f",
               "Name": "Tier 1 Hardware & Software"
           },
-   "name": "Test Cart 1",
+   "name": "AEM Cart 1",
    "status": "New"
    }
    ];
 
-  //POST request with body equal on data in JSON format
-  fetch('https://rlp-dev.congacloud.io/api/Cart/v1/carts', {
-    method: 'POST',
-    headers: {
-     'Accept': 'application/json',
-     'Content-Type': 'application/json',
-     Authorization: `Bearer ${token}`,
-     pricelistid: "cbc75112-60e9-47b2-a632-f70d5912b70f",
-     OrganizationId: "a65544f2-b4cb-400c-a014-1fd6b04861c9",
-     OrganizationFriendlyId: "rlp-dev",
-     UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
-    },
-    body: JSON.stringify(createcart),
-  })
-  .then((response) => response.json())
-  .then((createcart) => {
-//    console.log('Success:', createcart);
-//    console.log(createcart[0].Id);
-    // set cart id in cookie
-    const cartId = createcart[0].Id;
-    const cookies = new Cookies();
-    cookies.set('cartId', cartId, { path: '/' });
-//    console.log(cookies.get('cartId'));
-    alert(`Item Added! ${p_name} was added to the cart.`);
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-  }
+   const addcartitem = [
+  {
+   "PrimaryTxnLineNumber": "1",
+   "ProductId": p_id,
+   "LineType": "Product/Service",
+   "PricingStatus": "Pending",
+   "ExternalId": "DCAEM-AEM Cart 1",
+   "Quantity": 1
+   }
+   ];
+
+    // checking cart id is there or not
+    if(cookies.get('cartId')){
+    console.log('Cart is already created');
+    const cartId = cookies.get('cartId');
+          // Add cart items api - POST
+          fetch(`https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/items`, {
+            method: 'POST',
+            headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json',
+             Authorization: `Bearer ${token}`,
+             OrganizationId: "rlp-dev",
+             orgname: "rlp-dev",
+             UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
+            },
+            body: JSON.stringify(addcartitem),
+            });
+            alert(`Item Added! ${p_name} was added to the cart.`);
+    }
+    else{
+    console.log("New Cart");
+      //create cart api - POST
+      fetch('https://rlp-dev.congacloud.io/api/Cart/v1/carts', {
+        method: 'POST',
+        headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         Authorization: `Bearer ${token}`,
+         OrganizationId: "rlp-dev",
+         orgname: "rlp-dev",
+         UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
+        },
+        body: JSON.stringify(createcart),
+      })
+      .then((response) => response.json())
+      .then((createcart) => {
+        // set cart id in cookie
+        const cartId = createcart[0].Id;
+        cookies.set('cartId', cartId, { path: '/' });
+
+      // Add cart items api - POST
+      fetch(`https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/items`, {
+        method: 'POST',
+        headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         Authorization: `Bearer ${token}`,
+         OrganizationId: "rlp-dev",
+         orgname: "rlp-dev",
+         UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
+        },
+        body: JSON.stringify(addcartitem),
+        });
+
+        alert(`Item Added! ${p_name} was added to the cart.`);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+      }
+    }
+
+
      render() {
 //    console.log("Product List");
 //    console.log(this.state.data);
@@ -130,9 +174,11 @@ console.log(index);
                 this.state.data.map((record,index) => {
             return(
                 <div className="card1" key={ record.Id }>
-                <div className="card1__body">
+                <div className="card1__body" onClick={() => this.openModal(index)}
+                  show={this.state.isOpen && this.state.isOpen[index]}
+                  onHide={() => this.closeModal(index)}>
                     <h5 className="card1__title" id="card1__title" ><b>{record.Name}</b></h5>
-                    <img src={record.ImageURL} class="card1__image" id="card1__image" />
+                    <img src={record.ImageURL !== null ? record.ImageURL : NoImage} class="card1__image" id="card1__image" />
                     <p className="text-truncate ng-tns-c123-3" style={{margin:"5px 0px -4px 15px" ,font:"12px" }}>Standard Price</p>
                     { record.Prices && record.Prices.map(price=> {
                         return(
@@ -151,17 +197,10 @@ console.log(index);
 
                  <popup>
                              <div className=" button">
-                                              <button
-                                                  className="btn btn-block btn-outline-primary btn-sm ladda-button"
-                                                  key={record.Id}
-                                                  onClick={() => this.openModal(index)}
-                                                  style={{width: "90%", height: "40px",border:"2px solid"}}
-                                                >
-                                                  View Details
-                                                </button>
+
                                                      { record.Prices && record.Prices.map(price=> {
                                                      return(
-                                                     <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"2px solid"}} onClick={this.createCart.bind(this, record.Id,record.Name,price.ListPrice)}>Add to Cart</button>
+                                                     <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record.Id,record.Name)}>Add to Cart</button>
                                                          )
                                                     })}
                                               </div>

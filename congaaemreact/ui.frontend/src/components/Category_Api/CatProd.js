@@ -169,7 +169,7 @@ export default class CatProd extends React.Component {
                 <div className="card1" key={ record1.Id }>
                 <div className="card1__body">
                         <h5 className="card1__title" id="card1__title" >{record1.Name}</h5>
-                    <img src={record1.ImageURL !== 'NULL' ? record1.ImageURL : NoImage} class="card1__image" id="card1__image" />
+                    <img src={record1.ImageURL !== null ? record1.ImageURL : NoImage} class="card1__image" id="card1__image" />
                     <p className="card1__description">Standard Price</p>
 
 
