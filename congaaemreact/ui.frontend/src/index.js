@@ -11,26 +11,32 @@ import App from './App';
 import LocalDevModelClient from './LocalDevModelClient';
 import './components/import-components';
 import './index.css';
+import { msalConfig } from "./authConfig";
+import { PublicClientApplication } from "@azure/msal-browser";
+import { MsalProvider } from "@azure/msal-react";
 
 const modelManagerOptions = {};
-if(process.env.REACT_APP_PROXY_ENABLED) {
+if (process.env.REACT_APP_PROXY_ENABLED) {
     modelManagerOptions.modelClient = new LocalDevModelClient(process.env.REACT_APP_API_HOST);
 }
+const msalInstance = new PublicClientApplication(msalConfig);
 
 const renderApp = () => {
     ModelManager.initialize(modelManagerOptions).then(pageModel => {
         const history = createBrowserHistory();
         render(
-            <Router history={history}>
-                <App
-                    history={history}
-                    cqChildren={pageModel[Constants.CHILDREN_PROP]}
-                    cqItems={pageModel[Constants.ITEMS_PROP]}
-                    cqItemsOrder={pageModel[Constants.ITEMS_ORDER_PROP]}
-                    cqPath={pageModel[Constants.PATH_PROP]}
-                    locationPathname={window.location.pathname}
-                />
-            </Router>,
+            <MsalProvider instance={msalInstance}>
+                <Router history={history}>
+                    <App
+                        history={history}
+                        cqChildren={pageModel[Constants.CHILDREN_PROP]}
+                        cqItems={pageModel[Constants.ITEMS_PROP]}
+                        cqItemsOrder={pageModel[Constants.ITEMS_ORDER_PROP]}
+                        cqPath={pageModel[Constants.PATH_PROP]}
+                        locationPathname={window.location.pathname}
+                    />
+                </Router>
+            </MsalProvider>,
             document.getElementById('spa-root')
         );
     });
@@ -39,6 +45,5 @@ const renderApp = () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
     renderApp();
 });
