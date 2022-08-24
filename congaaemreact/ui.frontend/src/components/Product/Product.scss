@@ -7,7 +7,13 @@
  object-fit: contain;
   //margin-top: 20px;
  }
-
+ .cart{margin-left: -10px;}
+ 
+ .cmp-carousel{
+&__action ,&__action--previous, &__action--next, &__action-icon ,&__action-text{
+display:none;
+}
+}
 
  #card1__title{
  padding: 1rem;

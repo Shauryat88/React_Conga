@@ -144,102 +144,95 @@ export default class CatProd extends React.Component {
       });
       }
 
-  render() {
-    return (
+ render() {
+  return (
 
-    <div class="row">
-      <div class="column1">
-      <h2 class="category-title">Related Categories</h2>
-      <ul class="list-unstyled">
-        {
-          this.state.data.map(record => {
-          return(
-            <li><a class="category-list" onClick={this.getRandomUsers.bind(this, record.Id)}>{record.Name}</a></li>
-            )
-            })
-       }
-        </ul>
-      </div>
-
-      <div class="column2">
-        <div className="wrapper1">
-        {
-          this.state.data1.map((record1,index1) => {
-            return(
-                <div className="card1" key={ record1.Id }>
-                <div className="card1__body">
-                        <h5 className="card1__title" id="card1__title" >{record1.Name}</h5>
-                    <img src={record1.ImageURL !== null ? record1.ImageURL : NoImage} class="card1__image" id="card1__image" />
-                    <p className="card1__description">Standard Price</p>
-
-
-                    { record1.Prices && record1.Prices.map(price=> {
-                        return(
-                        <div className="card1__price" key={ record1.Id }>
-                            ${price.ListPrice}
-                        </div>
-                        )
-                    })}
-
-                </div>
-                <hr/>
-                <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
-                <label class="mr-3">Quantity</label>
-                <input type="number" min="1"id="quantity"  name="quantity" placeholder="1" class="form-control w-25"/>
-                </div>
-                <popup>
-                <div className=" button">
-                                 <button
-                                     className="btn btn-block btn-outline-primary btn-sm ladda-button"
-                                     key={record1.Id}
-                                     onClick={() => this.openModal(index1)}
-                                     style={{width: "90%", height: "40px",border:"2px solid"}}
-                                   >
-                                     View Details
-                                   </button>
-                                     { record1.Prices && record1.Prices.map(price=> {
-                                                                                        return(
-                                                                                        <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"2px solid"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
-                                                                                            )
-                                                                                       })}
-
-                                 </div>
-               <Modal key = {record1.Id} show={ this.state.isOpen && this.state.isOpen[index1]} onHide={()=>this.closeModal(index1)}>
-                 <Modal.Header closeButton>
-                   <Modal.Title><div key={record1.Id}><h3>{record1.Name} </h3></div></Modal.Title>
-                 </Modal.Header>
-
-                 <Modal.Body><img src={record1.ImageURL} class="popup_image" /><br/>
-               <p id="price"> Standard Price: {record1.Prices && record1.Prices.map((price) => {
-                     return (
-                       <div className="card__price" key={record1.Id}>
-                         ${price.ListPrice}
-                       </div>
-                     );
-                   })}</p></Modal.Body>
-                 <Modal.Footer style={{padding:"0"}}>
-                                              <div className=' d-flex input-group-sm ng-star-inserted' style={{margin: " 9px 246px -71px 0px"}} >
-                                              <label class="mr-3">Quantity</label>
-                                              <input type="number" min="1" name="quantity" placeholder="1" class="form-control w-25"/>
-                                              </div>
-                                    { record1.Prices && record1.Prices.map(price=> {
-                                                                              return(
-                                                                               <button variant="primary" className="card__btn" style={{width: "130px"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
-                                                                                )
-                                                                              })}
-
-             </Modal.Footer>
-               </Modal>
-             </popup>
-                </div>
-            )
-        })
-        }
-        </div>
-      </div>
-
+  <div class="row">
+    <div class="column1">
+    <h2 class="category-title">Related Categories</h2>
+    <ul class="list-unstyled">
+      {
+        this.state.data.map(record => {
+        return(
+          <li><a class="category-list" onClick={this.getRandomUsers.bind(this, record.Id)}>{record.Name}</a></li>
+          )
+          })
+     }
+      </ul>
     </div>
 
-        );
-  }
+    <div class="column2">
+      <div className="wrapper1">
+      {
+        this.state.data1.map((record1,index1) => {
+          return(
+              <div className="card1" key={ record1.Id }>
+              <div className="card1__body"                 onClick={() => this.openModal(index1)} show={ this.state.isOpen && this.state.isOpen[index1]} onHide={()=>this.closeModal(index1)}>
+                      <h5 className="card1__title" id="card1__title" >{record1.Name}</h5>
+                  <img src={record1.ImageURL !== 'NULL' ? record1.ImageURL : NoImage} class="card1__image" id="card1__image" />
+                  <p className="card1__description">Standard Price</p>
+
+
+                  { record1.Prices && record1.Prices.map(price=> {
+                      return(
+                      <div className="card1__price" key={ record1.Id }>
+                          ${price.ListPrice}
+                      </div>
+                      )
+                  })}
+
+              </div>
+              <hr/>
+              <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
+              <label class="mr-3">Quantity</label>
+              <input type="number" min="1"id="quantity"  name="quantity" placeholder="1" class="form-control w-25"/>
+              </div>
+              <popup>
+              <div className=" button">
+                              
+                                   { record1.Prices && record1.Prices.map(price=> {
+                                                                                      return(
+                                                                                      <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
+                                                                                          )
+                                                                                     })}
+
+                               </div>
+             <Modal key = {record1.Id} show={ this.state.isOpen && this.state.isOpen[index1]} onHide={()=>this.closeModal(index1)}>
+               <Modal.Header closeButton>
+                 <Modal.Title><div key={record1.Id}><h3>{record1.Name} </h3></div></Modal.Title>
+               </Modal.Header>
+
+               <Modal.Body><img src={record1.ImageURL} class="popup_image" /><br/>
+             <p id="price"> Standard Price: {record1.Prices && record1.Prices.map((price) => {
+                   return (
+                     <div className="card__price" key={record1.Id}>
+                       ${price.ListPrice}
+                     </div>
+                   );
+                 })}</p></Modal.Body>
+               <Modal.Footer style={{padding:"0"}}>
+                                            <div className=' d-flex input-group-sm ng-star-inserted' style={{margin: " 9px 246px -71px 0px"}} >
+                                            <label class="mr-3">Quantity</label>
+                                            <input type="number" min="1" name="quantity" placeholder="1" class="form-control w-25"/>
+                                            </div>
+                                  { record1.Prices && record1.Prices.map(price=> {
+                                                                            return(
+                                                                             <button variant="primary" className="card__btn" style={{width: "130px"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
+                                                                              )
+                                                                            })}
+
+           </Modal.Footer>
+             </Modal>
+           </popup>
+              </div>
+          )
+      })
+      }
+      </div>
+    </div>
+
+  </div>
+
+      );
+}
 }

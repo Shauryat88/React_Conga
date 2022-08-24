@@ -115,6 +115,7 @@ console.log(index);
             body: JSON.stringify(addcartitem),
             });
             alert(`Item Added! ${p_name} was added to the cart.`);
+            window.location.reload(false);
     }
     else{
     console.log("New Cart");
@@ -152,6 +153,7 @@ console.log(index);
         });
 
         alert(`Item Added! ${p_name} was added to the cart.`);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.error('Error:', error);
