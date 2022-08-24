@@ -70,7 +70,7 @@ export default class Cart extends React.Component {
                                 <Dropdown.Item href="#">{obj.Name}</Dropdown.Item>
                                 <div class="align-self-center1 d-flex2">
                                   <label class="m-0 mr-2 font-weight-bold">Quantity</label>&nbsp;&nbsp;&nbsp;&nbsp;{obj.Quantity}
-                                  <strong class="ml-auto">$1,100.00</strong>
+                                  <strong class="ml-auto"><pre>{obj.ListPrice.CurrencySymbol} {obj.ListPrice.Value}</pre></strong>
                                 </div>
                             </div>
                       </li>
@@ -78,6 +78,7 @@ export default class Cart extends React.Component {
                    </div>
                     );
                   })}
+                  <button class="btn btn-primary btn-raised btn-block"> View Cart </button>
                 </Dropdown.Menu>
                <span class="badge badge-primary p-1 ng-star-inserted">{this.state.count}</span>
              </Dropdown>
