@@ -35,11 +35,11 @@ export default class Header extends Component {
          </div>)
     }
 
-    get cartButton() {
-    return(<div className="Cart">
-            <FontAwesomeIcon icon={faShoppingCart} />
-         </div>)
-    }
+//    get cartButton() {
+//    return(<div className="Cart">
+//            <FontAwesomeIcon icon={faShoppingCart} />
+//         </div>)
+//    }
 
     get logo() {
         let logo = <img className="Logo-img" src={congaLogo} alt="Conga" />;
@@ -80,7 +80,6 @@ export default class Header extends Component {
                     {this.sidebarmenu}
                     {this.logo}
                     {this.searchButton}
-                    {this.cartButton}
                     <Cart />
                 </div>
             </header>
