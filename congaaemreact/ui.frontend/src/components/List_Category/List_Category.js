@@ -25,7 +25,7 @@ async componentDidMount() {
           this.state.data.map(record => {
           return(
             <div id="category_list">
-                <li><a class="menu__item" href="#">{record.Name}</a></li> <br/>
+                <li><a class="menu__item" href="/content/congaaemreact/us/en/catalog.html?wcmmode=disabled">{record.Name}</a></li> <br/>
             </div>
             )
             })
