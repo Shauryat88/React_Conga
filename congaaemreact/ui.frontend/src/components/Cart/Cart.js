@@ -8,12 +8,16 @@ require('./Cart.css');
 
 export default class Cart extends React.Component {
 
- constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-        getdata: [],
+      getdata: {
+        CartResponse: {
+          LineItems: []
+        }
+      }
     };
-}
+  }
 
   componentDidMount()
   {
@@ -22,9 +26,9 @@ export default class Cart extends React.Component {
     const cartId = cookies.get('cartId');
 
     fetch(
-      `https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/items`,
+      `https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/price`,
       {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -36,18 +40,15 @@ export default class Cart extends React.Component {
     )
     .then(results => results.json())
         .then(getdata => this.setState({ getdata: getdata }))
-        //.then(console.log(this.state.getdata))
     .catch((err) => {
       console.log("error", err);
     });
   }
 
-
   render() {
     console.log('Get Cart Items');
-//    console.log(this.state.getdata);
-    const Records = this.state.getdata;
-    console.log(Records);
+    const Records=this.state.getdata;
+    const cart=Records.CartResponse;
     return (
     <div class="main">
         <div className="App">
@@ -58,11 +59,9 @@ export default class Cart extends React.Component {
                   </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  {Records.LineItems && Records.LineItems.map((obj, i) => {
-                  this.state.count = Object.keys(Records.LineItems).length;
-//                  console.log(this.state.count);
+                  {cart.LineItems.map(obj=>{
                    return (
-                   <div key={i}>
+                   <div>
                      <ul class="list-group">
                       <li class="d-flex2 d-flex1">
                         <img class="align-self-center1" src="https://eng-ecom.apttuscloud.io/ui/ecom/qa/assets/images/default.png?random=45"/>
@@ -70,7 +69,7 @@ export default class Cart extends React.Component {
                                 <Dropdown.Item href="#">{obj.Name}</Dropdown.Item>
                                 <div class="align-self-center1 d-flex2">
                                   <label class="m-0 mr-2 font-weight-bold">Quantity</label>&nbsp;&nbsp;&nbsp;&nbsp;{obj.Quantity}
-                                  <strong class="ml-auto"><pre>{obj.ListPrice.CurrencySymbol} {obj.ListPrice.Value}</pre></strong>
+                                  <strong class="ml-auto"><pre>${obj.ListPrice}</pre></strong>
                                 </div>
                             </div>
                       </li>
@@ -78,9 +77,9 @@ export default class Cart extends React.Component {
                    </div>
                     );
                   })}
-                  <button class="btn btn-primary btn-raised btn-block"> View Cart </button>
+                  <a class="viewcart" href="/content/congaaemreact/us/en/view_cart.html"><button class="btn btn-primary btn-raised btn-block"> View Cart </button></a>
                 </Dropdown.Menu>
-               <span class="badge badge-primary p-1 ng-star-inserted">{this.state.count}</span>
+               <span class="badge badge-primary p-1 ng-star-inserted">{Records.TotalLines}</span>
              </Dropdown>
             </Container>
         </div>

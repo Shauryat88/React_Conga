@@ -72,6 +72,7 @@ console.log(index);
   }
   async createCart(p_id,p_name)
   {
+    console.log(p_id);
     console.log(p_name);
     const cookies = new Cookies();
 
@@ -175,7 +176,7 @@ console.log(index);
         {
                 this.state.data.map((record,index) => {
             return(
-                <div className="card1" key={ record.Id }>
+               <div className="card1" key={ record.Id }>
                 <div className="card1__body" onClick={() => this.openModal(index)}
                   show={this.state.isOpen && this.state.isOpen[index]}
                   onHide={() => this.closeModal(index)}>
@@ -193,19 +194,20 @@ console.log(index);
                 </div>
                 <hr/>
                 <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
-                <label class="mr-3">Quantity</label>
-               <input type="number" min="1" name="quantity"  placeholder="1"  class="form-control w-25"/>
+                   <label class="mr-3">Quantity</label>
+                   <input type="number" min="1" name="quantity"  placeholder="1"  class="form-control w-25"/>
                 </div>
 
-                 <popup>
-                             <div className=" button">
+<div className=" button">
+     { record.Prices && record.Prices.map(price=> {
+     return(
+     <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record.Id,record.Name)}>Add to Cart</button>
+         )
+    })}
+</div>
 
-                                                     { record.Prices && record.Prices.map(price=> {
-                                                     return(
-                                                     <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record.Id,record.Name)}>Add to Cart</button>
-                                                         )
-                                                    })}
-                                              </div>
+                 <popup>
+
                             <Modal key = {record.Id} show={ this.state.isOpen && this.state.isOpen[index]} onHide={()=>this.closeModal(index)}>
                               <Modal.Header closeButton>
                                 <Modal.Title><div key={record.Id}><h3>{record.Name} </h3></div></Modal.Title>

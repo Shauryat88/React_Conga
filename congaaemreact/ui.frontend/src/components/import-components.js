@@ -35,6 +35,8 @@ import './List_Product/List_Product';
 import './Footer/Footer';
 
 import './ProductCatalog/ProductCatalog';
+import './ViewCart/ViewCart';
+import './CheckOut/CheckOut';
 
 
 
