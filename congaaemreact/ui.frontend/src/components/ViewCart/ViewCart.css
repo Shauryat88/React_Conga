@@ -249,6 +249,8 @@ hr {
 .ladda-label {
     position: relative;
     display: inline-block;
+    color: white;
+
 }
 .ladda-button .ladda-spinner {
     position: absolute;
@@ -270,4 +272,12 @@ font-size: medium;
 }
 .frequency{
     font-size: smaller;
+}
+.samplename
+{
+	margin-left: -19px;
+}
+
+.place_order{
+color: white;
 }
