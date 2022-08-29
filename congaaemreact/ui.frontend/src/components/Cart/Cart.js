@@ -64,7 +64,6 @@ export default class Cart extends React.Component {
                    <div>
                      <ul class="list-group">
                       <li class="d-flex2 d-flex1">
-                        <img class="align-self-center1" src="https://eng-ecom.apttuscloud.io/ui/ecom/qa/assets/images/default.png?random=45"/>
                             <div class="ml-3">
                                 <Dropdown.Item href="#">{obj.Name}</Dropdown.Item>
                                 <div class="align-self-center1 d-flex2">
