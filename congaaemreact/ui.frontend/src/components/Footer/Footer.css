@@ -149,14 +149,13 @@ footer a:hover{
 }
 .withConga{
     font-family: "Montserrat",sans-serif;
-    color: #ef617a;
     padding-left: 7px;
     font-size: larger;
     font-weight: 600;
 }
 .footertext{
   font-family: "Montserrat",sans-serif;
-    color: #ef617a;
+color: black;
     font-size:larger;
 }
 .topic{
@@ -167,5 +166,6 @@ footer a:hover{
 }
 .p_text{
 margin-top:27px;
+
     font-size: x-large;
 }
