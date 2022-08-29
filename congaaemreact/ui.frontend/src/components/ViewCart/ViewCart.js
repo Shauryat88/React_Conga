@@ -75,7 +75,7 @@ export default class ViewCart extends Component {
                                  </div>
                                  <p class="text-muted subtitle"><span>Standard Price</span></p>
                                  <p class="description"></p>
-                                 <div class="row">
+                                 <div class="row fr">
                                    <div class="col-md-3">
                                      <div><span>
                                      <dt class="frequency"> Pricing Frequency </dt>
