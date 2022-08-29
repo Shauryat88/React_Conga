@@ -71,7 +71,7 @@ export default class ViewCart extends Component {
                         <td class="w-50 pt-4">
                            <div class="h-100 d-flex flex-column border-right pr-3">
                                  <div class="d-flex align-items-center mb-2">
-                                   <h5 class="mr-2 mb-0"><a class="name" href="#">{obj.Name}</a></h5>
+                                   <h5 class="mr-2 mb-0 samplename"><a class="name" href="#">{obj.Name}</a></h5>
                                  </div>
                                  <p class="text-muted subtitle"><span>Standard Price</span></p>
                                  <p class="description"></p>
@@ -149,10 +149,10 @@ export default class ViewCart extends Component {
               </div>
               <div class="card-body">
                 <div class="d-flex justify-content-between">
-                  <span> Sub Total </span><span class="font-weight-bold"> {total} </span>
+                  <span> Sub Total </span><span class="font-weight-bold">$ {total} </span>
                 </div>
                 <hr class="mt-3 mb-2"/>
-                <div class="d-flex justify-content-between"><span> Total Price </span><span class="font-weight-bold"> {total} </span></div>
+                <div class="d-flex justify-content-between"><span> Total Price </span><span class="font-weight-bold"> ${total} </span></div>
                 <hr class="mt-2 mb-3"/>
                 <div class="d-flex justify-content-end"><button class="btn btn-primary btn-raised ladda-button"><span class="ladda-label">< a class="place_order" href="/content/congaaemreact/us/en/view_cart.html"> Place Order </a></span><span class="ladda-spinner"></span></button></div>
               </div>
