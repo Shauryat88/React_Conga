@@ -152,7 +152,7 @@ export default class ViewCart extends Component {
                   <span> Sub Total </span><span class="font-weight-bold">$ {total} </span>
                 </div>
                 <hr class="mt-3 mb-2"/>
-                <div class="d-flex justify-content-between"><span> Total Price </span><span class="font-weight-bold"> ${total} </span></div>
+                <div class="d-flex justify-content-between"><span> Total Price </span><span class="font-weight-bold">$ {total} </span></div>
                 <hr class="mt-2 mb-3"/>
                 <div class="d-flex justify-content-end"><button class="btn btn-primary btn-raised ladda-button"><span class="ladda-label">< a class="place_order" href="/content/congaaemreact/us/en/view_cart.html"> Place Order </a></span><span class="ladda-spinner"></span></button></div>
               </div>

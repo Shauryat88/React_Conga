@@ -6,6 +6,8 @@ import Cookies from 'universal-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal} from "react-bootstrap";
 import {randomstring} from 'randomstring-js';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 // include product style file
 require('./Product.scss');
@@ -123,8 +125,12 @@ console.log(index);
             },
             body: JSON.stringify(addcartitem),
             });
-            alert(`Item Added! ${p_name} was added to the cart.`);
-            window.location.reload(false);
+           toast.success(`${p_name} adding to the cart!`);
+           
+            //window.location.reload(false);
+            	 setTimeout(function(){
+             		 window.location.reload();
+           		 }, 1500);
     }
     else{
     console.log("New Cart");
@@ -161,8 +167,11 @@ console.log(index);
         body: JSON.stringify(addcartitem),
         });
 
-        alert(`Item Added! ${p_name} was added to the cart.`);
-        window.location.reload(false);
+      toast.success(`${p_name} adding to the cart!`);
+     //   window.location.reload(false);
+    		 setTimeout(function(){
+        		 window.location.reload();
+         	 }, 1500);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -245,6 +254,7 @@ console.log(index);
             )
         })
         }
+        <ToastContainer />
         </div>
         );
     }

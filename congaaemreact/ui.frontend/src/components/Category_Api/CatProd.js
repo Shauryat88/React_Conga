@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer, toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 import { getData } from '../Category_Api/Category_Api';
 import NoImage from '../../media/No-image-found.jpg';
 import {token} from "../storeToken.js";
@@ -7,6 +9,7 @@ import { Modal} from "react-bootstrap";
 require('../Product/Product.scss');
 //import 'bootstrap/dist/css/bootstrap.min.css';
 require('../ProductCatalog/ProductCatalog.css');
+
 
 export default class CatProd extends React.Component {
   constructor(props) {
@@ -151,8 +154,11 @@ export default class CatProd extends React.Component {
             },
             body: JSON.stringify(addcartitem),
             });
-            alert(`Item Added! ${p_name} was added to the cart.`);
-            window.location.reload(false);
+             toast.success(`${p_name} adding to the cart!`);
+    	 //   window.location.reload(false);
+    				 setTimeout(function(){
+        			 window.location.reload();
+         			 }, 1500);                      
     }
     else{
     console.log("New Cart");
@@ -189,8 +195,11 @@ export default class CatProd extends React.Component {
         body: JSON.stringify(addcartitem),
         });
 
-        alert(`Item Added! ${p_name} was added to the cart.`);
-        window.location.reload(false);
+          toast.success(`${p_name} adding to the cart!`);
+     //   window.location.reload(false);
+    	 setTimeout(function(){
+        	 window.location.reload();
+          }, 1500);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -285,7 +294,7 @@ export default class CatProd extends React.Component {
       }
       </div>
     </div>
-
+<ToastContainer />
   </div>
 
       );
