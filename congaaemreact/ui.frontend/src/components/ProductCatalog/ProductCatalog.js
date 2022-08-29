@@ -7,7 +7,7 @@ export const ProductCatalogEditConfig = {
     emptyLabel: 'Product Catalog',
 
     isEmpty: function(props) {
-        return !props || !props.message || props.message.trim().length < 1;
+        return !props || !props.text || props.text.trim().length < 1;
     }
 };
 
@@ -22,4 +22,4 @@ export default class ProductCatalog extends Component {
   }
 }
 
-MapTo('congaaemreact/components/productcatalog')(ProductCatalog, ProductCatalogEditConfig);
+MapTo('congaaemreact/components/productcatalog')(ProductCatalog);

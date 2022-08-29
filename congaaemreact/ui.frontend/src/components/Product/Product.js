@@ -5,6 +5,7 @@ import {token} from "../storeToken.js";
 import Cookies from 'universal-cookie';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal} from "react-bootstrap";
+import {randomstring} from 'randomstring-js';
 
 // include product style file
 require('./Product.scss');
@@ -76,24 +77,31 @@ console.log(index);
     console.log(p_name);
     const cookies = new Cookies();
 
+    // generate random string for cart name
+    var randomstring = require("randomstring");
+    const cart_name= 'CART'+randomstring.generate(7);
+
   const createcart = [
   {
   "PriceList": {
               "Id": "cbc75112-60e9-47b2-a632-f70d5912b70f",
               "Name": "Tier 1 Hardware & Software"
           },
-   "name": "AEM Cart 1",
+   "name": cart_name,
    "status": "New"
    }
    ];
 
+   // generate random string for external id
+   var randomstring = require("randomstring");
+   const external_id= 'Externalid'+randomstring.generate(7);
    const addcartitem = [
   {
    "PrimaryTxnLineNumber": "1",
    "ProductId": p_id,
    "LineType": "Product/Service",
    "PricingStatus": "Pending",
-   "ExternalId": "DCAEM-AEM Cart 1",
+   "ExternalId": external_id,
    "Quantity": 1
    }
    ];
@@ -206,34 +214,33 @@ console.log(index);
     })}
 </div>
 
-                 <popup>
+        <popup>
+            <Modal key = {record.Id} show={ this.state.isOpen && this.state.isOpen[index]} onHide={()=>this.closeModal(index)}>
+              <Modal.Header closeButton>
+                <Modal.Title><div key={record.Id}><h3>{record.Name} </h3></div></Modal.Title>
+              </Modal.Header>
+              <Modal.Body><img src={record.ImageURL !== null ? record.ImageURL : NoImage} class="popup_image" /><br/>
 
-                            <Modal key = {record.Id} show={ this.state.isOpen && this.state.isOpen[index]} onHide={()=>this.closeModal(index)}>
-                              <Modal.Header closeButton>
-                                <Modal.Title><div key={record.Id}><h3>{record.Name} </h3></div></Modal.Title>
-                              </Modal.Header>
-                              <Modal.Body><img src={record.ImageURL} class="popup_image" /><br/>
-
-                            <p id="price"> Standard Price: {record.Prices && record.Prices.map((price) => {
-                                  return (
-                                    <div className="card__price" key={record.Id}>
-                                      ${price.ListPrice}
-                                    </div>
-                                  );
-                                })}</p></Modal.Body>
-                              <Modal.Footer style={{padding:"0"}}>
-                              <div className=' d-flex input-group-sm ng-star-inserted' style={{margin: " 9px 246px -71px 0px"}} >
-                              <label class="mr-3">Quantity</label>
-                              <input type="number" min="1" name="quantity" placeholder="1" class="form-control w-25"/>
-                              </div>
-                              { record.Prices && record.Prices.map(price=> {
-                                                 return(
-                                                  <button variant="primary" className="card__btn" style={{width: "130px"}} onClick={this.createCart.bind(this, record.Id,record.Name,price.ListPrice)}>Add to Cart</button>
-                                                   )
-                                                 })}
-                              </Modal.Footer>
-                            </Modal>
-                          </popup>
+            <p id="price"> Standard Price: {record.Prices && record.Prices.map((price) => {
+                  return (
+                    <div className="card__price" key={record.Id}>
+                      ${price.ListPrice}
+                    </div>
+                  );
+                })}</p></Modal.Body>
+              <Modal.Footer style={{padding:"0"}}>
+              <div className=' d-flex input-group-sm ng-star-inserted' style={{margin: " 9px 246px -71px 0px"}} >
+              <label class="mr-3">Quantity</label>
+              <input type="number" min="1" name="quantity" placeholder="1" class="form-control w-25"/>
+              </div>
+              { record.Prices && record.Prices.map(price=> {
+                                 return(
+                                  <button variant="primary" className="card__btn" style={{width: "130px"}} onClick={this.createCart.bind(this, record.Id,record.Name,price.ListPrice)}>Add to Cart</button>
+                                   )
+                                 })}
+              </Modal.Footer>
+            </Modal>
+        </popup>
                 </div>
             )
         })

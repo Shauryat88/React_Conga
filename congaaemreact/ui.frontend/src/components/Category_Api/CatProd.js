@@ -97,56 +97,112 @@ export default class CatProd extends React.Component {
 
       } );
     }
-    async createCart(p_id,p_name,price)
+    async createCart(p_id,p_name)
       {
-    //    console.log(p_id);
+        console.log(p_id);
         console.log(p_name);
-    //    console.log(price);
+        const cookies = new Cookies();
 
-      const createcart = [
-      {
-      "PriceList": {
-                  "Id": "cbc75112-60e9-47b2-a632-f70d5912b70f",
-                  "Name": "Tier 1 Hardware & Software"
-              },
-       "name": "Test Cart 1",
-       "status": "New"
-       }
-       ];
+        // generate random string for cart name
+        var randomstring = require("randomstring");
+        const cart_name= 'CART'+randomstring.generate(7);
 
-      //POST request with body equal on data in JSON format
+  const createcart = [
+  {
+  "PriceList": {
+              "Id": "cbc75112-60e9-47b2-a632-f70d5912b70f",
+              "Name": "Tier 1 Hardware & Software"
+          },
+   "name": cart_name,
+   "status": "New"
+   }
+   ];
+
+  // generate random string for external id
+  var randomstring = require("randomstring");
+  const external_id= 'Externalid'+randomstring.generate(7);
+
+  const addcartitem = [
+ {
+  "PrimaryTxnLineNumber": "1",
+  "ProductId": p_id,
+  "LineType": "Product/Service",
+  "PricingStatus": "Pending",
+  "ExternalId": external_id,
+  "Quantity": 1
+  }
+  ];
+
+
+    // checking cart id is there or not
+    if(cookies.get('cartId')){
+    console.log('Cart is already created');
+    const cartId = cookies.get('cartId');
+          // Add cart items api - POST
+          fetch(`https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/items`, {
+            method: 'POST',
+            headers: {
+             'Accept': 'application/json',
+             'Content-Type': 'application/json',
+             Authorization: `Bearer ${token}`,
+             OrganizationId: "rlp-dev",
+             orgname: "rlp-dev",
+             UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
+            },
+            body: JSON.stringify(addcartitem),
+            });
+            alert(`Item Added! ${p_name} was added to the cart.`);
+            window.location.reload(false);
+    }
+    else{
+    console.log("New Cart");
+      //create cart api - POST
       fetch('https://rlp-dev.congacloud.io/api/Cart/v1/carts', {
         method: 'POST',
         headers: {
          'Accept': 'application/json',
          'Content-Type': 'application/json',
          Authorization: `Bearer ${token}`,
-         pricelistid: "cbc75112-60e9-47b2-a632-f70d5912b70f",
-         OrganizationId: "a65544f2-b4cb-400c-a014-1fd6b04861c9",
-         OrganizationFriendlyId: "rlp-dev",
+         OrganizationId: "rlp-dev",
+         orgname: "rlp-dev",
          UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
         },
         body: JSON.stringify(createcart),
       })
       .then((response) => response.json())
       .then((createcart) => {
-    //    console.log('Success:', createcart);
-    //    console.log(createcart[0].Id);
         // set cart id in cookie
         const cartId = createcart[0].Id;
-        const cookies = new Cookies();
         cookies.set('cartId', cartId, { path: '/' });
-    //    console.log(cookies.get('cartId'));
+
+      // Add cart items api - POST
+      fetch(`https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/items`, {
+        method: 'POST',
+        headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+         Authorization: `Bearer ${token}`,
+         OrganizationId: "rlp-dev",
+         orgname: "rlp-dev",
+         UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
+        },
+        body: JSON.stringify(addcartitem),
+        });
+
         alert(`Item Added! ${p_name} was added to the cart.`);
+        window.location.reload(false);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
       }
+    }
 
  render() {
-  return (
+//    console.log("Product Catalog List");
+//    console.log(this.state.data);
 
+  return (
   <div class="row">
     <div class="column1">
     <h2 class="category-title">Related Categories</h2>
@@ -167,9 +223,9 @@ export default class CatProd extends React.Component {
         this.state.data1.map((record1,index1) => {
           return(
               <div className="card1" key={ record1.Id }>
-              <div className="card1__body"                 onClick={() => this.openModal(index1)} show={ this.state.isOpen && this.state.isOpen[index1]} onHide={()=>this.closeModal(index1)}>
+              <div className="card1__body" onClick={() => this.openModal(index1)} show={ this.state.isOpen && this.state.isOpen[index1]} onHide={()=>this.closeModal(index1)}>
                       <h5 className="card1__title" id="card1__title" >{record1.Name}</h5>
-                  <img src={record1.ImageURL !== 'NULL' ? record1.ImageURL : NoImage} class="card1__image" id="card1__image" />
+                  <img src={record1.ImageURL !== null ? record1.ImageURL : NoImage} class="card1__image" id="card1__image" />
                   <p className="card1__description">Standard Price</p>
 
 
@@ -187,22 +243,21 @@ export default class CatProd extends React.Component {
               <label class="mr-3">Quantity</label>
               <input type="number" min="1"id="quantity"  name="quantity" placeholder="1" class="form-control w-25"/>
               </div>
-              <popup>
-              <div className=" button">
-                              
-                                   { record1.Prices && record1.Prices.map(price=> {
-                                                                                      return(
-                                                                                      <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
-                                                                                          )
-                                                                                     })}
+<div className=" button">
+ { record1.Prices && record1.Prices.map(price=> {
+        return(
+        <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
+            )
+       })}
+</div>
 
-                               </div>
+         <popup>
              <Modal key = {record1.Id} show={ this.state.isOpen && this.state.isOpen[index1]} onHide={()=>this.closeModal(index1)}>
                <Modal.Header closeButton>
                  <Modal.Title><div key={record1.Id}><h3>{record1.Name} </h3></div></Modal.Title>
                </Modal.Header>
 
-               <Modal.Body><img src={record1.ImageURL} class="popup_image" /><br/>
+               <Modal.Body><img src={record1.ImageURL !== null ? record1.ImageURL : NoImage} class="popup_image" /><br/>
              <p id="price"> Standard Price: {record1.Prices && record1.Prices.map((price) => {
                    return (
                      <div className="card__price" key={record1.Id}>
@@ -223,7 +278,7 @@ export default class CatProd extends React.Component {
 
            </Modal.Footer>
              </Modal>
-           </popup>
+         </popup>
               </div>
           )
       })
