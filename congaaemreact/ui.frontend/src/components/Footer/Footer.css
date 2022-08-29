@@ -147,3 +147,25 @@ footer a:hover{
     padding-left: 0;
   }
 }
+.withConga{
+    font-family: "Montserrat",sans-serif;
+    color: #ef617a;
+    padding-left: 7px;
+    font-size: larger;
+    font-weight: 600;
+}
+.footertext{
+  font-family: "Montserrat",sans-serif;
+    color: #ef617a;
+    font-size:larger;
+}
+.topic{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+}
+.p_text{
+margin-top:27px;
+    font-size: x-large;
+}

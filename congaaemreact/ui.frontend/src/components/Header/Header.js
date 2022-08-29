@@ -79,6 +79,7 @@ export default class Header extends Component {
                 <div className="Header-container">
                     {this.sidebarmenu}
                     {this.logo}
+                    <div className="Header-logo-text"><div id="Header-logo-text">Conga Commerce</div></div>
                     {this.searchButton}
                     <Cart />
                 </div>

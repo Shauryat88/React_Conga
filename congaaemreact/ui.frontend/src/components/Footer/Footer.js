@@ -41,10 +41,10 @@ export const FooterEditConfig = {
              <div class="left box">
                <div class="upper">
                  <img className="Logo-img" src={congaLogo} alt="Conga" />
-                 <p><h4>Goodbye Complexity.Hello Conga </h4></p>
-                 <p><h4>Manage,Trandoform,and scale thorughout  
-                    the revenue lifecycle with the most
-                    complete solution available.</h4> </p>
+                 <div className="footertext">
+                     <div className="p_text">Goodbye complexity. Hello Conga.</div>
+                     <div>Manage,transform and scale throughout the revenue lifecycle with the most complete solution available.</div>
+                 </div>
                </div>
              </div>
              <div class="middle box">
@@ -58,7 +58,7 @@ export const FooterEditConfig = {
                <div><a href="#">Special Products</a></div>
              </div>
              <div class="right box">
-               <div class="topic">Get In Touch</div>
+               <div class="topic">Get In Touch <div className="withConga">with Conga</div></div>
                <form action="#">
                  <input type="text" placeholder="Your name here..."/>
                  <input type="text" placeholder="Your email here..."/>
