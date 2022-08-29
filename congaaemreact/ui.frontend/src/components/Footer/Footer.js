@@ -41,8 +41,10 @@ export const FooterEditConfig = {
              <div class="left box">
                <div class="upper">
                  <img className="Logo-img" src={congaLogo} alt="Conga" />
-                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the subas industry standard dummy text ever since the 1500s.</p>
-                 <p>When an unknown printer took a galley of type and If you are going to use a passage of Lorem Ipsum scrambled it to make.</p>
+                 <p><h4>Goodbye Complexity.Hello Conga </h4></p>
+                 <p><h4>Manage,Trandoform,and scale thorughout  
+                    the revenue lifecycle with the most
+                    complete solution available.</h4> </p>
                </div>
              </div>
              <div class="middle box">
