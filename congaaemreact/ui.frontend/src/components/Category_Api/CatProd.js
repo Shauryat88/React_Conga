@@ -1,4 +1,5 @@
 import React from 'react';
+import { EventBus } from '../../Eventmanager';
 import { ToastContainer, toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
 import { getData } from '../Category_Api/Category_Api';
@@ -153,12 +154,14 @@ export default class CatProd extends React.Component {
              UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
             },
             body: JSON.stringify(addcartitem),
-            });
-             toast.success(`${p_name} adding to the cart!`);
-    	 //   window.location.reload(false);
-    				 setTimeout(function(){
-        			 window.location.reload();
-         			 }, 1500);                      
+            })
+           .then(() => {
+
+        toast.success(`${p_name} adding to the cart!`);
+
+        EventBus.emit('UPDATE_CART')
+
+      })                     
     }
     else{
     console.log("New Cart");
@@ -193,13 +196,14 @@ export default class CatProd extends React.Component {
          UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
         },
         body: JSON.stringify(addcartitem),
-        });
+        })
+.then(() => {
 
-          toast.success(`${p_name} adding to the cart!`);
-     //   window.location.reload(false);
-    	 setTimeout(function(){
-        	 window.location.reload();
-          }, 1500);
+        toast.success(`${p_name} adding to the cart!`);
+
+        EventBus.emit('UPDATE_CART')
+
+      })     
       })
       .catch((error) => {
         console.error('Error:', error);

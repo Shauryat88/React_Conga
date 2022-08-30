@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import {Container , Dropdown} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { EventBus } from '../../Eventmanager';
 require('./Cart.css');
 
 export default class Cart extends React.Component {
@@ -19,31 +20,38 @@ export default class Cart extends React.Component {
     };
   }
 
-  componentDidMount()
-  {
-    const cookies = new Cookies();
-    console.log(cookies.get('cartId'));
-    const cartId = cookies.get('cartId');
+  componentDidMount() {
+    this.upadteCartCount();
+    EventBus.on('UPDATE_CART', ()=>{
+      this.upadteCartCount();
+      console.log('Cart Updated');
+    })
+  }
 
-    fetch(
-      `https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/price`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          orgname: "rlp-dev",
-          OrganizationId: "rlp-dev",
-          UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
-        }
-      }
-    )
-    .then(results => results.json())
-        .then(getdata => this.setState({ getdata: getdata }))
-    .catch((err) => {
-      console.log("error", err);
-    });
-  }
+  upadteCartCount = () => {
+    const cookies = new Cookies();
+    console.log(cookies.get('cartId'));
+    const cartId = cookies.get('cartId');
+
+    fetch(
+      `https://rlp-dev.congacloud.io/api/cart/v1/carts/${cartId}/price`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          orgname: "rlp-dev",
+          OrganizationId: "rlp-dev",
+          UserId: "d717a075-9cbf-480c-b230-837e0e6dee75"
+        }
+      }
+    )
+      .then(results => results.json())
+      .then(getdata => this.setState({ getdata: getdata }))
+      .catch((err) => {
+        console.log("error", err);
+      });
+  }
 
   render() {
     console.log('Get Cart Items');
