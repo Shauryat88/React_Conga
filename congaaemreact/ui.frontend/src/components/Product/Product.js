@@ -30,6 +30,7 @@ export default class Product extends Component {
     this.state = {
         data: [],
          isOpen:[],
+          quantity: {}
     };
 }
 
@@ -74,7 +75,7 @@ console.log(index);
 
     } );
   }
-  async createCart(p_id,p_name)
+  async createCart(p_id,p_name,index)
   {
     console.log(p_id);
     console.log(p_name);
@@ -105,7 +106,7 @@ console.log(index);
    "LineType": "Product/Service",
    "PricingStatus": "Pending",
    "ExternalId": external_id,
-   "Quantity": 1
+   "Quantity": this.state.quantity[index]
    }
    ];
 
@@ -128,7 +129,7 @@ console.log(index);
             })
           .then(() => {
 
-        toast.success(`${p_name} adding to the cart!`);
+        toast.success(`${p_name} adding to the cart!`, { autoClose: 800 });
 
         EventBus.emit('UPDATE_CART')
 
@@ -170,7 +171,7 @@ console.log(index);
         })
         .then(() => {
 
-        toast.success(`${p_name} adding to the cart!`);
+       toast.success(`${p_name} adding to the cart!`, { autoClose: 800 });
 
         EventBus.emit('UPDATE_CART')
 
@@ -181,12 +182,13 @@ console.log(index);
       });
       }
     }
+ enterQuantity(event, index) {
+    this.setState({ quantity: { ... this.state.quantity, [index]: event.target.value } });
+    console.log('this.state', this.state.quantity)
 
+  }
 
      render() {
-//    console.log("Product List");
-//    console.log(this.state.data);
-
         if(ProductEditConfig.isEmpty(this.props)) {
             return null;
         }
@@ -214,14 +216,18 @@ console.log(index);
                 </div>
                 <hr/>
                 <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
-                   <label class="mr-3">Quantity</label>
-                   <input type="number" min="1" name="quantity"  placeholder="1"  class="form-control w-25"/>
+                   <label class="mr-3">Quantity</label>               
+                   <input type="number"
+
+                    onInput={(event) => this.enterQuantity(event, index)}
+
+                    min="1" name="quantity" placeholder="1" class="form-control w-25" />
                 </div>
 
 <div className=" button">
      { record.Prices && record.Prices.map(price=> {
      return(
-     <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record.Id,record.Name)}>Add to Cart</button>
+     <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record.Id,record.Name,index)}>Add to Cart</button>
          )
     })}
 </div>

@@ -20,6 +20,7 @@ export default class CatProd extends React.Component {
       data: [],
       data1: [],
       isOpen:[],
+      quantity: {}
     };
 
     this.getRandomUsers = this.getRandomUsers.bind(this);
@@ -101,7 +102,7 @@ export default class CatProd extends React.Component {
 
       } );
     }
-    async createCart(p_id,p_name)
+    async createCart(p_id,p_name,index)
       {
         console.log(p_id);
         console.log(p_name);
@@ -133,7 +134,7 @@ export default class CatProd extends React.Component {
   "LineType": "Product/Service",
   "PricingStatus": "Pending",
   "ExternalId": external_id,
-  "Quantity": 1
+  "Quantity": this.state.quantity[index]
   }
   ];
 
@@ -157,7 +158,7 @@ export default class CatProd extends React.Component {
             })
            .then(() => {
 
-        toast.success(`${p_name} adding to the cart!`);
+        toast.success(`${p_name} adding to the cart!`, { autoClose: 800 });
 
         EventBus.emit('UPDATE_CART')
 
@@ -199,7 +200,7 @@ export default class CatProd extends React.Component {
         })
 .then(() => {
 
-        toast.success(`${p_name} adding to the cart!`);
+       toast.success(`${p_name} adding to the cart!`, { autoClose: 800 });
 
         EventBus.emit('UPDATE_CART')
 
@@ -211,6 +212,11 @@ export default class CatProd extends React.Component {
       }
     }
 
+ enterQuantity(event, index) {
+    this.setState({ quantity: { ... this.state.quantity, [index]: event.target.value } });
+    console.log('this.state', this.state.quantity)
+
+  }
  render() {
 //    console.log("Product Catalog List");
 //    console.log(this.state.data);
@@ -254,12 +260,17 @@ export default class CatProd extends React.Component {
               <hr/>
               <div class="align-items-center d-flex justify-content-center input-group-sm ng-star-inserted">
               <label class="mr-3">Quantity</label>
-              <input type="number" min="1"id="quantity"  name="quantity" placeholder="1" class="form-control w-25"/>
+            
+              <input type="number"
+
+                    onInput={(event) => this.enterQuantity(event, index1)}
+
+                    min="1" name="quantity" placeholder="1" class="form-control w-25" />
               </div>
 <div className=" button">
  { record1.Prices && record1.Prices.map(price=> {
         return(
-        <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
+        <button className="btn btn-block btn-outline-primary btn-sm ladda-button" style={{ width: "90%" ,height:"40px",margin:"10px 0px 10px 0px",border:"1px solid"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,index1)}>Add to Cart</button>
             )
        })}
 </div>
@@ -285,7 +296,7 @@ export default class CatProd extends React.Component {
                                             </div>
                                   { record1.Prices && record1.Prices.map(price=> {
                                                                             return(
-                                                                             <button variant="primary" className="card__btn" style={{width: "130px"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,price.ListPrice)}>Add to Cart</button>
+                                                                             <button variant="primary" className="card__btn" style={{width: "130px"}} onClick={this.createCart.bind(this, record1.Id,record1.Name,index1)}>Add to Cart</button>
                                                                               )
                                                                             })}
 
