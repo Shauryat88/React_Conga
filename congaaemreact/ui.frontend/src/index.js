@@ -15,6 +15,8 @@ import { msalConfig } from "./authConfig";
 import { PublicClientApplication } from "@azure/msal-browser";
 import { MsalProvider } from "@azure/msal-react";
 
+import './fonts/SalesforceSans/Salesforce Sans.ttf';
+
 const modelManagerOptions = {};
 if (process.env.REACT_APP_PROXY_ENABLED) {
     modelManagerOptions.modelClient = new LocalDevModelClient(process.env.REACT_APP_API_HOST);

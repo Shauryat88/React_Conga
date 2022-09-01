@@ -19,7 +19,7 @@ footer{
   bottom: 0;
   left: 0;
   background-color: #f8f8f8!important;
-  font-family: "Poppins",sans-serif;
+  /* font-family: "Poppins",sans-serif; */
 }
 footer .content{
   max-width: 1350px;
@@ -148,13 +148,13 @@ footer a:hover{
   }
 }
 .withConga{
-    font-family: "Montserrat",sans-serif;
+   /* font-family: "Montserrat",sans-serif; */
     padding-left: 7px;
     font-size: larger;
     font-weight: 600;
 }
 .footertext{
-  font-family: "Montserrat",sans-serif;
+ /* font-family: "Montserrat",sans-serif; */
 color: black;
     font-size:larger;
 }

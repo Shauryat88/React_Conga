@@ -67,7 +67,7 @@ margin: 0;
 padding: 0;
 }
 body{
-font-family:Oxygen, sans-serif;
+/* font-family:Oxygen, sans-serif; */
 margin:2rem;
 }
 .wrapper{
@@ -113,18 +113,18 @@ padding:0 1rem;
 padding:0 1rem;
 font-size: larger;
 font-weight: 700;
-font-family: cursive;
+/* font-family: cursive; */
 }
 &__pricepop{
 font-size: larger;
 font-weight: 700;
-font-family: cursive;
+/* font-family: cursive; */
 }
 
 
 &__btn{
 padding:1rem;
-font-family:inherit;
+/* font-family:inherit; */
 font-weight:bold;
 font-size:1rem;
 margin:1rem;

@@ -27,7 +27,7 @@
 .category-title{
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
-  font-family: inherit;
+ /* font-family: inherit; */
   font-weight: 500;
   line-height: 1.2;
   color: inherit;

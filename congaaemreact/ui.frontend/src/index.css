@@ -16,10 +16,14 @@
 
 /* Global styles */
 
-html,
+html * {
+    font-weight: 400;
+    font-style: normal;
+    font-family: "Salesforce Sans" !important;
+          } ,
 body {
   border: 0;
-  font: inherit;
+ /* font: inherit; */
   font-size: 100%;
   margin: 0;
   padding: 0;
@@ -38,6 +42,17 @@ h5,
 p,
 .nav-container,
 .rw-box {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  /* font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important; */
+  font-family: 'Salesforce Sans' !important;
   color: #000000;
+}
+
+
+
+@font-face {
+  font-family: "Salesforce Sans" !important;
+  src: local("Salesforce Sans"),
+  url("./fonts/SalesforceSans/Salesforce Sans.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
 }
